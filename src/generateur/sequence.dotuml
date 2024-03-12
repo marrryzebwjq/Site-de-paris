@@ -1,0 +1,24 @@
+SequenceDiagram [frame=true framecolor=steelblue label="Sequence Diagram"] {
+    actor bookmaker;
+    actor utilisateur;
+    lifeline evenement;
+    lifeline ticket;
+    lifeline systeme;
+    activate systeme;
+    bookmaker --> evenement "Ouverture de l'évènement"
+    activate evenement;
+    bookmaker --> evenement "Ajoute un type de pari"
+    utilisateur --> systeme "Demande un ticket"
+    systeme --> ticket "Ouvre un ticket"
+    activate ticket;
+    ticket --> utilisateur "Informe compatibilité du ticket avec le type de pari et l'évènement"
+    systeme --> evenement "Début fermeture évènement"
+    systeme --> ticket "Demande résultats gagnants"
+    ticket --> evenement "Compare ticket et résultats"
+    ticket --> systeme "Envoie résultats gagnants"
+    systeme --> utilisateur "Crédite les tickets gagnants"
+    deactivate ticket;
+    systeme --> evenement "Fin fermeture évènement"
+    deactivate evenement;
+    deactivate systeme;
+}
