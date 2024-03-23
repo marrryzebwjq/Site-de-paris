@@ -9,23 +9,61 @@ Bookmaker "1" -- "1" Systeme : "Ouvrir évènement / Ajouter résultat avancé /
 
 
 
-object "Evenement : Rennes-OM" as EvenementF {
-    Nom : Ligue 1
+
+
+object "Evenement : Ligue 1" as EvenementF {
+    Nom : Rennes - OM
     Sport : Foot
     PariCote : 50
     PariMaximal : 20
     PariPlafond : 50
 }
+EvenementF "*" --o "1" Systeme
+
+
+object AResultatFoot
+object ResultatSimpleFoot {
+    Gagnant : Rennes
+}
+object AResultatAvanceFoot {
+    Sport : Foot
+    NomResultat : mitemps
+}
+ResultatSimpleFoot "1" --o "1" EvenementF
+ResultatSimpleFoot --|> AResultatFoot
+AResultatAvanceFoot "*" --o "1" EvenementF
+AResultatAvanceFoot --|> AResultatFoot
+
+
+
 object "Evenement : Roland-Garos" as EvenementT {
-    Nom : Djokovic Nadal
+    Nom : Djokovic - Nadal
     Sport : Tennis
     PariCote : 50
     PariMaximal : 200
     PariPlafond : 502
 }
-
-EvenementF "*" --o "1" Systeme
 EvenementT "*" --o "1" Systeme
+
+
+object AResultatTennis
+object ResultatSimpleTennis {
+    Gagnant : Nadal
+}
+object AResultatAvanceTennis {
+    Sport : Tennis
+    NomResultat : mitemps
+}
+ResultatSimpleTennis "1" --o "1" EvenementT
+ResultatSimpleTennis --|> AResultatTennis
+AResultatAvanceTennis "*" --o "1" EvenementT
+AResultatAvanceTennis --|> AResultatTennis
+
+
+
+
+
+
 
 
 
@@ -34,58 +72,117 @@ object "Parieur : Popo" as ParieurP {
     Nom : popolesimpleparieur
     Capital : 10000
 }
+Systeme "1" -- "*" ParieurP : "< Crédite / Débite ; Demande Ticket / Demande Créditation >"
+
+
+
+object ATicketPF {
+    montant = 10
+}
+object "TicketSimple de Popo Foot" as TicketSimplePF
+
+ATicketPF "*" -- "1...*" ParieurP : "Associé à"
+ATicketPF "*" --o "1" EvenementF
+
+TicketSimplePF --|> ATicketPF
+
+AResultatFoot "1" --o "1" ATicketPF
+ResultatSimpleFoot "1" --o "1" TicketSimplePF
+
+
+
+
+
+
+
+
+
+
 object "Parieur : Corgi" as ParieurC {
     Nom : corgileparieuravancé
     Capital : 10000
 }
+Systeme "1" -- "*" ParieurC : "< Crédite / Débite ; Demande Ticket / Demande Créditation >"
+
+
+
+object ATicketCF {
+    montant = 100
+}
+object "TicketSimple de Corgi Foot" as TicketSimpleCF
+
+ATicketCF "*" -- "1...*" ParieurC : "Associé à"
+ATicketCF "*" --o "1" EvenementF
+
+TicketSimpleCF --|> ATicketCF
+
+AResultatFoot "1" --o "1" ATicketCF
+ResultatSimpleFoot "1" --o "1" TicketSimpleCF
+
+
+
+object ATicketCT {
+    montant = 1000
+}
+object "TicketSimple de Corgi Tennis" as TicketSimpleCT
+
+ATicketCT "*" -- "1...*" ParieurC : "Associé à"
+ATicketCT "*" --o "1" EvenementT
+
+TicketSimpleCT --|> ATicketCF
+
+AResultatTennis "1" --o "1" ATicketCT
+ResultatSimpleTennis "1" --o "1" TicketSimpleCT
+
+
+
+object ATicketCFA {
+    montant = 1050
+}
+object "TicketAvancé de Corgi Foot" as ATicketAvanceCF
+
+ATicketCFA "*" -- "1...*" ParieurC : "Associé à"
+ATicketCFA "*" --o "1" EvenementF
+
+ATicketAvanceCF --|> ATicketCFA
+
+AResultatFoot "1" --o "1" ATicketCFA
+AResultatAvanceFoot "1" --o "1" ATicketAvanceCF
+
+
+
+
+
+
+
+
+
+
+
+
 object "Parieur : Margueritte" as ParieurM {
     Nom : Margueritteelleaimepasparier
     Capital : 10000
 }
 
-Systeme "1" -- "*" ParieurP : "< Crédite / Débite ; Demande Ticket / Demande Créditation >"
-Systeme "1" -- "*" ParieurC : "< Crédite / Débite ; Demande Ticket / Demande Créditation >"
 Systeme "1" -- "*" ParieurM : "< Crédite / Débite ; Demande Ticket / Demande Créditation >"
 
 
 
-
-object "TicketSimple de Popo Foot" as TicketSimplePF
-object "TicketSimple de Corgi Foot" as TicketSimpleCF
-object "TicketSimple de Corgi Tennis" as TicketSimpleCT
-object "TicketAvancé de Corgi Foot" as TicketAvanceCF
+object ATicketMTA {
+    montant = 5
+}
 object "TicketAvancé de Margueritte Tennis" as ATicketAvanceMT
 
-object ATicket {
-    montant = 10
-}
+ATicketMTA "*" -- "1...*" ParieurM : "Associé à"
+ATicketMTA "*" --o "1" EvenementT
 
-ATicket "*" -- "1...*" Parieur : "Associé à"
-ATicket "*" --o "1" Evenement
+ATicketAvanceMT --|> ATicketMTA
 
-TicketSimple --|> ATicket
-ATicketAvance --|> ATicket
+AResultatTennis "1" --o "1" ATicketMTA
+AResultatAvanceTennis "1" --o "1" ATicketAvanceMT
 
 
 
-
-object AResultat
-object ResultatSimple {
-    Gagnant : jean
-}
-object AResultatAvance {
-    Sport : foot
-    NomResultat : mitemps
-}
-
-AResultat "1" --o "1" ATicket
-
-ResultatSimple "1" --o "1" Evenement
-ResultatSimple --|> AResultat
-ResultatSimple "1" --o "1" TicketSimple
-
-AResultatAvance "*" --o "1" Evenement
-AResultatAvance --|> AResultat
-AResultatAvance "1" --o "1" ATicketAvance
 
 @enduml
