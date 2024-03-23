@@ -1,134 +1,117 @@
 ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
-  // Classe abstraite contenant les résultats à la fin d'un sport.
-  // Gagnant est l'équipe gagnante à la fin du match.
-  // Les classes dérivées contiennent les informations à la fin d'un match en
-  // fonction du type de sport.
   abstract class AResultat
   {
-    public compare(AResultat) : boolean
+    private Gagnant : String
   }
-
-  // Classe abstraite contenant le montant parié par le parieur.
-  // Les classes dériviées contiennent les valeurs des champs pariés.
   abstract class ATicket
   {
     private Montant : Entier
   }
-
-  // Classe contenant le nom de l'évènement, le nom du sport, les tickets associés, le
-  // résultat simple de l'évènement (gagnant), et les résultats avancés de l'évènement (spécifique au sport)
-  class Evenement
-  {
-    private Nom : String
-    private Sport : String
-    private PariCote : int
-    private PariMaximal : int
-    private PariPlafond : int
-
-    public Evenement(InNom : String, InSport : String, InPariCote : int, InPariMaximal : int, InPariPlafond : int)
-  }
-
-  // Un évènement contient tous les tickets associés
-  ATicket "*" -a-> "1" Evenement;
-
-  // Classe abstraite indiquant que le ticket est un pari avancé.
   abstract class ATicketAvance
-  {}
-
-  // Un ticket avancé est un type de pari
-  ATicketAvance -g-> ATicket;
-
-  // Classe abstraite indiquant que le type est un pari, permettant d'extraire depuis
-  // un AResultat les champs nécessaires au pari, et de le comparer avec le pari du ticket
-  abstract class AResultat
-  {}
-
-  // Un ticket contient aussi un APari, que l'on compare avec 
-  AResultat "1" -a-> "1" ATicket;
-
-  // Classe abstraite définissant un résultat possible associé à un sport
-  abstract class AResultatAvance
   {
-    private Sport : String; // Permet d'associer ce type de résultat à un sport
+  
+  }
+  abstract class APari
+  {
+    abstract private estGagnant(ticket : ATicket, evenement : Evenement)
+  }
+  abstract class APariAvance
+  {
+    abstract private estGagnant(ticket : ATicket, evenement : Evenement)
   }
 
-  // Classe possédant un résultat simple, c'est-à-dire le pari sur l'évènement
   class TicketSimple
-  {}
-
-  // Classe définissant un résultat simple, c'est-à-dire le gagnant de l'évènement, quelque soit le sport
-  class ResultatSimple
   {
-    private Gagnant : String;
+    private PariGagnant : String
+  }
+  
+  class PariSimple
+  {
+    private estGagnant(ticket : TicketSimple, evenement : Evenement)
   }
 
-  // Un ticket simple possède un résultat simple (Qui est le gagnant de l'évènement?)
-  ResultatSimple "1" -a-> "1" TicketSimple;
-
-  // Un résultat simple est un type de résultat
-  ResultatSimple -g-> AResultat;
-
-  // TicketSimple hérité de ATicket
-  TicketSimple -g-> ATicket;
-
-  // Classe définissant un résultat avancé, c'est-à-dire tous les autres types de résultat qui dépends du sport
-  abstract class AResultatAvance
-  {
-    private NomResultat : String;
-  }
-
-  // Un ticket avancé contient le pari du résultat avancé.
-  AResultatAvance "1" -a-> "1" ATicketAvance
-
-  // Un résultat avancé est un type de résultat
-  AResultatAvance -g-> AResultat;
-
-  // Classe définissant le bookmaker
   class Bookmaker
   {
-    public Bookmaker()
-    private demandeOuvertureEvenement(InEvenement : Evenement) : boolean
-    private demandeOuverturePariAvance(InNomEvenement : String, InResultatAvance : AResultatAvance) : boolean
-    private demandeAttributionPariAvance(InNomEvenement : String, InNomResultat : String) : AResultatAvance
+    public ajoutEvenement(Evenement : AResultat)
   }
 
-  // Classe définissant le parieur
+  class Evenement
+  {
+    private Sport : String
+
+    public ajoutAPari(Pari : APari)
+  }
+
   class Parieur
   {
-    private Nom : String;
-    private Capital : int = "10000";
+    private NombreDeJetons : Entier
 
-    public Parieur(InNom : String)
-    private demandeTicket(InEvenement : String, InResultat : AResultat, InMontant : int) : boolean
-    private demandeAjoutTokens(InTokens : Montant) : boolean
+    public parier(pari : APari, montant : Montant)
   }
 
-  // Classe définissant le système
   class Systeme
   {
-    private crediter(InTicket : ATicket) : void
-    private debiter(InTicket : ATicket) : void
-
-    public ajoutTicket(InNomEvenement : String, InTicket : ATicket) : boolean
-    public ajoutEvenement(InNomEvenement : String) : boolean
-    public fermetureEvenement(InNomEvenement : String) : boolean
+    private FermetureEvenement(evenement : Evenement);
   }
 
-  // Définit la relation entre le bookmaker et le système
-  Bookmaker "1" -- "1" Systeme : "Ouvrir évènement / Ajouter résultat avancé / Fermer évènement >";
+  TicketSimple -g-> ATicket;
+  TicketSimple -- PariSimple : "Pointe sur >";
+  ATicketAvance -g-> ATicket;
+  ATicketAvance -- APariAvance : "Pointe sur >";
+  APari -- AResultat : "< Lecture";
+  AResultat "1" -a-> "1" Evenement;
+  APari "1...*" -a-> "1" Evenement;
+  Systeme "1" -- "1" Parieur : "< Credite / Debite";
+  Systeme "1" <-a- "*" ATicket;
+  APari "1" -- "1" Parieur with ATicket : "*";
+  PariSimple -g-> APari;
+  APariAvance -g-> APari;
+  Bookmaker "1" -a-> "*" Evenement;
 
-  // Indique qu'un évènement continent forcément un résultat simple
-  ResultatSimple "1" -a-> "1" Evenement;
+  class ResultatFootball
+  {
+    private scoreA1 : int
+    private scoreB1 : int
+    private scoreA2 : int 
+    private scoreB2 : int
+    private equipeA : String
+    private equipeB : String
+  };
 
-  // Indique qu'un évènement continent plusieurs résultats avancées
-  AResultatAvance "*" -a-> "1" Evenement;  
+  class ResultatBaseball
+  { 
+    private scoreA : int
+    private scoreB : int
+  };
 
-  // Définit le relation entre le parieur et le système
-  Systeme "1" -- "*" Parieur : "< Crédite / Débite ; Demande Ticket / Demande Créditation >";
-  
-  // Le système gère tous les évènements
-  Evenement "*" -a-> "1" Systeme;
+  class ResultatTennis
+  {
+    private scoreA1 : int 
+    private scoreB1 : int 
+    private scoreA2 : int
+    private scoreB2 : int 
+    private scoreA3 : int 
+    private scoreB3 : int 
+    private scoreA4 : int
+    private scoreB4 : int
+    private scoreA5 : int 
+    private scoreB5 : int
+    private joueurA : String
+    private joueurB : String 
+  };
 
-  // Chaque tickets est associé à un parieur.
-  ATicket "*" -- "1...*" Parieur : "Associé à"
+  class PariFootballMitemps1
+  {
+    private estGagnant(ticket : Ticket, evenement : Evenement);
+  };
+
+  ResultatFootball -g-> AResultat;
+  ResultatBaseball -g-> AResultat;
+  ResultatTennis   -g-> AResultat;
+
+  PariFootballMitemps1 -g-> APariAvance;
+
+  // Exemple
+  PariFootballMitemps1 -- ResultatFootball : "< Lecture Champs A1 et B1";
+
 }
