@@ -1,0 +1,91 @@
+@startuml
+
+
+object "Bookmaker : jean" as Bookmaker
+object Systeme
+
+Bookmaker "1" -- "1" Systeme : "Ouvrir évènement / Ajouter résultat avancé / Fermer évènement >"
+
+
+
+
+object "Evenement : Rennes-OM" as EvenementF {
+    Nom : Ligue 1
+    Sport : Foot
+    PariCote : 50
+    PariMaximal : 20
+    PariPlafond : 50
+}
+object "Evenement : Roland-Garos" as EvenementT {
+    Nom : Djokovic Nadal
+    Sport : Tennis
+    PariCote : 50
+    PariMaximal : 200
+    PariPlafond : 502
+}
+
+EvenementF "*" --o "1" Systeme
+EvenementT "*" --o "1" Systeme
+
+
+
+
+object "Parieur : Popo" as ParieurP {
+    Nom : popolesimpleparieur
+    Capital : 10000
+}
+object "Parieur : Corgi" as ParieurC {
+    Nom : corgileparieuravancé
+    Capital : 10000
+}
+object "Parieur : Margueritte" as ParieurM {
+    Nom : Margueritteelleaimepasparier
+    Capital : 10000
+}
+
+Systeme "1" -- "*" ParieurP : "< Crédite / Débite ; Demande Ticket / Demande Créditation >"
+Systeme "1" -- "*" ParieurC : "< Crédite / Débite ; Demande Ticket / Demande Créditation >"
+Systeme "1" -- "*" ParieurM : "< Crédite / Débite ; Demande Ticket / Demande Créditation >"
+
+
+
+
+object "TicketSimple de Popo Foot" as TicketSimplePF
+object "TicketSimple de Corgi Foot" as TicketSimpleCF
+object "TicketSimple de Corgi Tennis" as TicketSimpleCT
+object "TicketAvancé de Corgi Foot" as TicketAvanceCF
+object "TicketAvancé de Margueritte Tennis" as ATicketAvanceMT
+
+object ATicket {
+    montant = 10
+}
+
+ATicket "*" -- "1...*" Parieur : "Associé à"
+ATicket "*" --o "1" Evenement
+
+TicketSimple --|> ATicket
+ATicketAvance --|> ATicket
+
+
+
+
+object AResultat
+object ResultatSimple {
+    Gagnant : jean
+}
+object AResultatAvance {
+    Sport : foot
+    NomResultat : mitemps
+}
+
+AResultat "1" --o "1" ATicket
+
+ResultatSimple "1" --o "1" Evenement
+ResultatSimple --|> AResultat
+ResultatSimple "1" --o "1" TicketSimple
+
+AResultatAvance "*" --o "1" Evenement
+AResultatAvance --|> AResultat
+AResultatAvance "1" --o "1" ATicketAvance
+
+@enduml
