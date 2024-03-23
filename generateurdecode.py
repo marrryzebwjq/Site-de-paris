@@ -1,5 +1,5 @@
 fileuml = open("classes.dotuml", 'r')
-filejava = open("test2.txt", 'w')
+filejava = open("javaClass.java", 'w')
 
 
 def isDebutDeClasse(ligne) :
