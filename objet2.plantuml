@@ -1,0 +1,142 @@
+@startuml
+
+
+object Systeme
+object "Pierre-Jean : Bookmaker" as Bookmaker
+
+
+/' ---------- Les différents évènements sportifs disponibles : ---------- '/
+
+/' Tennis '/
+
+object "Roland-Garos : Evenement" as EvenementT {
+    Sport : Tennis
+}
+object "abstract ResultatTennis" as AResultatTennis {
+    Gagnant : Nadal
+}
+object "ResultatTennisAvance" as ResultatTennis {
+    scoreA1 : 1 
+    scoreB1 : 2 
+    scoreA2 : 3
+    scoreB2 : 12 
+    scoreA3 : 5 
+    scoreB3 : 27 
+    scoreA4 : 1
+    scoreB4 : 70
+    scoreA5 : 2 
+    scoreB5 : 40
+    joueurA : Djokovic
+    joueurB : Nadal
+}
+Bookmaker "1" --o "*" EvenementT
+AResultatTennis "1" --o "1" EvenementT
+ResultatTennis   --|> AResultatTennis
+
+/' Foot '/
+
+object "Ligue 1 : Evenement" as EvenementF {
+    Sport : Foot
+}
+object "abstract ResultatFoot" as AResultatFoot {
+    Gagnant : Rennes
+}
+object "ResultatFootAvance" as ResultatFootball {
+    scoreA1 : 10
+    scoreB1 : 0
+    scoreA2 : 5
+    scoreB2 : 1
+    equipeA : Rennes
+    equipeB : OM
+}
+Bookmaker "1" --o "*" EvenementF
+AResultatFoot "1" --o "1" EvenementF
+ResultatFootball --|> AResultatFoot
+
+
+
+/' ------------------- Les parieurs et leurs paris : ------------------- '/
+
+/' Corgi '/
+
+object "Corgi : Parieur" as ParieurC {
+    NombreDeJetons : 10000
+}
+Systeme "1" -- "1" ParieurC : "< Credite / Debite"
+
+
+/' Il fait un paris simple sur le match de Foot '/
+
+object "abstract Ticket" as ATicketCF {
+    Montant : 30
+}
+object "TicketSimple de Corgi, Foot :\nTicketSimple" as TicketSimpleCF {
+    PariGagnant : OM
+}
+Systeme o-- ATicketCF
+TicketSimpleCF --|> ATicketCF
+
+object PariSimpleCF
+
+TicketSimpleCF -- PariSimpleCF : "Pointe sur >"
+PariSimpleCF "1...*" --o "1" EvenementF
+PariSimpleCF -- AResultatFoot : "< Lecture"
+ATicketCF -- PariSimpleCF
+ATicketCF -- ParieurC
+
+
+
+
+
+
+
+
+
+
+
+
+
+/' Marguerite '/
+
+object "Marguerite : Parieur" as ParieurM {
+    NombreDeJetons : 10000
+}
+Systeme "1" -- "1" ParieurM : "< Credite / Debite"
+
+
+
+/' Elle fait un paris avancé sur le match de Foot '/
+
+object "abstract Ticket" as ATicketMF {
+    Montant : 9999
+}
+
+
+object "abstract TicketAvance" as ATicketAvanceMF
+
+ATicketAvanceMF --|> ATicketMF
+
+object APariAvanceMF
+APariAvanceMF --o EvenementF
+ATicketAvanceMF -- APariAvanceMF : "Pointe sur >"
+
+
+object "Marguerite Mitemps1 :\nPariFootballMitemps1" as PariFootballMitemps1{
+    scoreA1 : 8
+    scoreA2 : 2
+}
+PariFootballMitemps1 --|> APariAvanceMF
+PariFootballMitemps1 -- ResultatFootball : "< Lecture Champs A1 et B1"
+
+object "Marguerite Mitemps2 :\nPariFootballMitemps2" as PariFootballMitemps2{
+    scoreB1 : 0
+    scoreB2 : 1
+}
+PariFootballMitemps2 --|> APariAvanceMF
+PariFootballMitemps2 -- ResultatFootball : "< Lecture Champs A2 et B2"
+
+
+
+
+
+@enduml
