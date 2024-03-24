@@ -12,4 +12,4 @@ public abstract class ATicket {
     	return true;
     } 
 
-}
+};

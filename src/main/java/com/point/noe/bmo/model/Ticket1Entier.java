@@ -5,6 +5,6 @@ import javax.persistence.*;
 @Embeddable
 public class Ticket1Entier extends ATicket {
 
-    Integer PariEntier1;
+    public Integer PariEntier1;
 
-}
+};

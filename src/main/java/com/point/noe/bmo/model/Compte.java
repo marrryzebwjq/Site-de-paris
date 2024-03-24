@@ -6,7 +6,7 @@ import lombok.*;
 
 @Embeddable
 @Getter @Setter
-public class Compte {
+public class Compte {	
 	@Column(length = 12)
-	private int Montant;
-}
+	public int Montant = 1000;
+};

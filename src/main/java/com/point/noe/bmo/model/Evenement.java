@@ -69,4 +69,4 @@ public class Evenement {
 	// Pari Avances
 	@OneToMany
 	private Collection<APariAvance> PariAvances;
-}
+};

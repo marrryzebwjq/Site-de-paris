@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Embeddable
 public class PariSimple extends APari {
-	String Gagnant;
+	public String Gagnant;
 
 	private String Reference;
 	
@@ -12,4 +12,4 @@ public class PariSimple extends APari {
 	{
 		this.Reference = InReference;
 	}
-}
+};

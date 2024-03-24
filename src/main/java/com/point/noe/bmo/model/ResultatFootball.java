@@ -10,4 +10,4 @@ public class ResultatFootball extends AResultat {
     public Integer ScoreMiTempsA2;
     public Integer ScoreMiTempsB2;
 
-}
+};

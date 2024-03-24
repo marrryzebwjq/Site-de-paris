@@ -4,12 +4,16 @@ import javax.persistence.*;
 
 import org.openxava.annotations.*;
 
+import lombok.*;
+
 @Entity
+@Getter 
+@Setter
 public class Bookmaker {
 	@Id
+	@Column(length=32)
 	@Required
-	@Column(length=32, unique=true)
-	private String Nom;
+	private String nom;
 	
 	public boolean DemandeOuvertureEvenement(String sport, String evenement, AResultat resultat)
 	{
@@ -26,4 +30,4 @@ public class Bookmaker {
 		
 		return true;
 	}
-}
+};

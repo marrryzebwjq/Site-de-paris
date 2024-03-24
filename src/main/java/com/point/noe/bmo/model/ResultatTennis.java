@@ -18,4 +18,4 @@ public class ResultatTennis extends AResultat {
     public String joueurA;
     public String joueurB;
 
-}
+};
