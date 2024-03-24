@@ -9,5 +9,5 @@ public abstract class AResultat {
 	public String Gagnant;
 	
 	@Action("DemandeCreationPari")
-	abstract public APariAvance DemandeCreationPari(String NomPari, int PariMax, int GainMax);
+	abstract public APariAvance DemandeCreationPari(String InNomPari, int InPariMax, int InGainMax);
 };

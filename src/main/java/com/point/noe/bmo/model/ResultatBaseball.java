@@ -12,12 +12,12 @@ public class ResultatBaseball extends AResultat {
 
     @Action("DemandeCreationPari")
     @Override
-    public APariAvance DemandeCreationPari(String InNomPari, int PariMax, int GainMax)
+    public APariAvance DemandeCreationPari(String InNomPari, int InPariMax, int InGainMax)
     {
     	switch(InNomPari)
     	{
 	    	case "Scores":
-	    		return new Pari2Entier(InNomPari, this.ScoreA, this.ScoreB, PariMax, GainMax);
+	    		return new Pari2Entier(InNomPari, this.ScoreA, this.ScoreB, InPariMax, InGainMax);
 	    		
 	    	default:
 	    		return null;

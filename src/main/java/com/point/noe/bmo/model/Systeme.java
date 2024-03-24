@@ -13,10 +13,10 @@ public class Systeme {
 	@Embedded
 	private static Collection<Evenement> evenements;
 	
-	public static void AjouteTicket1Simple(String evenement, String pari, String pari1, Parieur parieur, int montant)
+	public static void AjouteTicket1Simple(String InEvenement, String InPari, String InPari1, Parieur InParieur, int InMontant)
 	{
-		// Vérifie si le parieur peut se faire débiter
-		if (parieur.getCompte().getMontant() < montant || montant < 0)
+		// Vérifie si le InParieur peut se faire débiter
+		if (InParieur.getCompte().getMontant() < InMontant || InMontant < 0)
 		{
 			// Pas possible de créer le ticket
 			return;
@@ -24,27 +24,27 @@ public class Systeme {
 		
 		for (Evenement e : evenements)
 		{
-			if (e.Nom.equals(evenement) && e.PariSimple.Nom.equals(pari))
+			if (e.Nom.equals(InEvenement) && e.PariSimple.Nom.equals(InPari))
 			{
-				if(e.PariSimple.PariMax != -1 && montant > e.PariSimple.PariMax)
+				if(e.PariSimple.PariMax != -1 && InMontant > e.PariSimple.PariMax)
 				{
-					// Pas possible de créer le ticket, montant demandé plus grand que le pari max
+					// Pas possible de créer le ticket, InMontant demandé plus grand que le InPari max
 					return;
 				}
 				
-				e.Tickets.add(new TicketSimple(montant, e.PariSimple, parieur, pari1));
+				e.Tickets.add(new TicketSimple(InMontant, e.PariSimple, InParieur, InPari1));
 				
 				// Débite
-				parieur.getCompte().Montant -= montant;
+				InParieur.getCompte().Montant -= InMontant;
 				
 				break;
 			}
 		}
 	}
-	public static void AjouteTicket1Entier(String evenement, String pari, int pari1, Parieur parieur, int montant)
+	public static void AjouteTicket1Entier(String InEvenement, String InPari, int InPari1, Parieur InParieur, int InMontant)
 	{
-		// Vérifie si le parieur peut se faire débiter
-		if (parieur.getCompte().getMontant() < montant || montant < 0)
+		// Vérifie si le InParieur peut se faire débiter
+		if (InParieur.getCompte().getMontant() < InMontant || InMontant < 0)
 		{
 			// Pas possible de créer le ticket
 			return;
@@ -52,22 +52,22 @@ public class Systeme {
 		
 		for (Evenement e : evenements)
 		{
-			if (e.Nom.equals(evenement))
+			if (e.Nom.equals(InEvenement))
 			{
 				for (APariAvance p : e.PariAvances)
 				{
-					if (p instanceof Pari1String && p.Nom.equals(pari))
+					if (p instanceof Pari1String && p.Nom.equals(InPari))
 					{
-						if(p.PariMax != -1 && montant > p.PariMax)
+						if(p.PariMax != -1 && InMontant > p.PariMax)
 						{
-							// Pas possible de créer le ticket, montant demandé plus grand que le pari max
+							// Pas possible de créer le ticket, InMontant demandé plus grand que le InPari max
 							return;
 						}
 						
-						e.Tickets.add(new Ticket1Entier(montant, p, parieur, pari1));
+						e.Tickets.add(new Ticket1Entier(InMontant, p, InParieur, InPari1));
 						
 						// Débite
-						parieur.getCompte().Montant -= montant;
+						InParieur.getCompte().Montant -= InMontant;
 
 						break;
 					}
@@ -76,10 +76,10 @@ public class Systeme {
 			}
 		}
 	}
-	public static void AjouteTicket2Entier(String evenement, String pari, int pari1, int pari2, Parieur parieur, int montant)
+	public static void AjouteTicket2Entier(String InEvenement, String InPari, int InPari1, int pari2, Parieur InParieur, int InMontant)
 	{
-		// Vérifie si le parieur peut se faire débiter
-		if (parieur.getCompte().getMontant() < montant || montant < 0)
+		// Vérifie si le InParieur peut se faire débiter
+		if (InParieur.getCompte().getMontant() < InMontant || InMontant < 0)
 		{
 			// Pas possible de créer le ticket
 			return;
@@ -87,22 +87,22 @@ public class Systeme {
 		
 		for (Evenement e : evenements)
 		{
-			if (e.Nom.equals(evenement))
+			if (e.Nom.equals(InEvenement))
 			{
 				for (APariAvance p : e.PariAvances)
 				{
-					if (p instanceof Pari1String && p.Nom.equals(pari))
+					if (p instanceof Pari1String && p.Nom.equals(InPari))
 					{
-						if(p.PariMax != -1 && montant > p.PariMax)
+						if(p.PariMax != -1 && InMontant > p.PariMax)
 						{
-							// Pas possible de créer le ticket, montant demandé plus grand que le pari max
+							// Pas possible de créer le ticket, InMontant demandé plus grand que le InPari max
 							return;
 						}
 						
-						e.Tickets.add(new Ticket2Entier(montant, p, parieur, pari1, pari2));
+						e.Tickets.add(new Ticket2Entier(InMontant, p, InParieur, InPari1, pari2));
 						
 						// Débite
-						parieur.getCompte().Montant -= montant;
+						InParieur.getCompte().Montant -= InMontant;
 
 						break;
 					}
@@ -111,10 +111,10 @@ public class Systeme {
 			}
 		}
 	}
-	public static void AjouteTicket1String(String evenement, String pari, String pari1, Parieur parieur, int montant)
+	public static void AjouteTicket1String(String InEvenement, String InPari, String InPari1, Parieur InParieur, int InMontant)
 	{
-		// Vérifie si le parieur peut se faire débiter
-		if (parieur.getCompte().getMontant() < montant || montant < 0)
+		// Vérifie si le InParieur peut se faire débiter
+		if (InParieur.getCompte().getMontant() < InMontant || InMontant < 0)
 		{
 			// Pas possible de créer le ticket
 			return;
@@ -122,22 +122,22 @@ public class Systeme {
 		
 		for (Evenement e : evenements)
 		{
-			if (e.Nom.equals(evenement))
+			if (e.Nom.equals(InEvenement))
 			{
 				for (APariAvance p : e.PariAvances)
 				{
-					if (p instanceof Pari1String && p.Nom.equals(pari))
+					if (p instanceof Pari1String && p.Nom.equals(InPari))
 					{
-						if(p.PariMax != -1 && montant > p.PariMax)
+						if(p.PariMax != -1 && InMontant > p.PariMax)
 						{
-							// Pas possible de créer le ticket, montant demandé plus grand que le pari max
+							// Pas possible de créer le ticket, InMontant demandé plus grand que le InPari max
 							return;
 						}
 						
-						e.Tickets.add(new Ticket1String(montant, p, parieur, pari1));
+						e.Tickets.add(new Ticket1String(InMontant, p, InParieur, InPari1));
 						
 						// Débite
-						parieur.getCompte().Montant -= montant;
+						InParieur.getCompte().Montant -= InMontant;
 						
 						break;
 					}
@@ -146,20 +146,20 @@ public class Systeme {
 			}
 		}
 	}
-	public static void AjoutePari(String evenement, String pari, int maxPari, int maxGain)
+	public static void AjoutePari(String InEvenement, String InPari, int maxPari, int maxGain)
 	{
 		for (Evenement e : evenements)
 		{
-			if (e.Nom.equals(evenement))
+			if (e.Nom.equals(InEvenement))
 			{
-				// Vérifie si le pari est déjà présent
+				// Vérifie si le InPari est déjà présent
 				for (APariAvance p : e.PariAvances)
 				{
-					if (p.Nom.equals(pari)) return;
+					if (p.Nom.equals(InPari)) return;
 				}
 				
-				// Ajout du pari
-				e.PariAvances.add(e.Resultat.DemandeCreationPari(pari, maxPari, maxGain));
+				// Ajout du InPari
+				e.PariAvances.add(e.Resultat.DemandeCreationPari(InPari, maxPari, maxGain));
 			
 				// Fin
 				break;
@@ -189,12 +189,12 @@ public class Systeme {
 			evenements.add(new Evenement(InSport, InNom, InPariMaxSimple, InGainMaxSimple));
 		}
 	}
-	public static void FermerEvenement(String evenement)
+	public static void FermerEvenement(String InEvenement)
 	{
 		for (Evenement e : evenements)
 		{
 			// Recherche de l'évènement
-			if (e.Nom.equals(evenement))
+			if (e.Nom.equals(InEvenement))
 			{
 				// Crédite les parieurs gagnant
 				int nGagnants 	  = 0;				
