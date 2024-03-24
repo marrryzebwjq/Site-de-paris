@@ -59,6 +59,5 @@ for line in fileuml :
         filejava.write("\n") #fin de ligne
         
 
-
 fileuml.close()
 filejava.close()
