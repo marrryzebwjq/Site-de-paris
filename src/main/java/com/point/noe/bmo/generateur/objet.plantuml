@@ -23,8 +23,8 @@ object ResultatFootball {
     equipeA : Rennes
     equipeB : OM
 }
-Bookmaker "1" --o "*" EvenementF
-AResultatFoot "1" --o "1" EvenementF
+Bookmaker --o EvenementF
+AResultatFoot --o EvenementF
 ResultatFootball --|> AResultatFoot
 
 /' Baseball '/
@@ -39,8 +39,8 @@ object ResultatBaseball {
     scoreA : 60
     scoreB : 10000
 }
-Bookmaker "1" --o "*" EvenementB
-AResultatBaseball "1" --o "1" EvenementB
+Bookmaker --o EvenementB
+AResultatBaseball --o EvenementB
 ResultatBaseball --|> AResultatBaseball
 
 
@@ -52,7 +52,7 @@ ResultatBaseball --|> AResultatBaseball
 object "Popol : Parieur" as ParieurP {
     NombreDeJetons : 10000
 }
-Systeme "1" -- "1" ParieurP : "< Credite / Debite"
+Systeme -- ParieurP : "< Credite / Debite"
 
 
 /' Il fait un paris simple sur le match de Foot '/
@@ -69,7 +69,7 @@ TicketSimplePF --|> ATicketPF
 object PariSimplePF
 
 TicketSimplePF -- PariSimplePF : "Pointe sur >"
-PariSimplePF "1...*" --o "1" EvenementF
+PariSimplePF --o EvenementF
 PariSimplePF -- AResultatFoot : "< Lecture"
 ATicketPF -- PariSimplePF
 ATicketPF -- ParieurP

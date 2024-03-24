@@ -29,8 +29,8 @@ object "ResultatTennisAvance" as ResultatTennis {
     joueurA : Djokovic
     joueurB : Nadal
 }
-Bookmaker "1" --o "*" EvenementT
-AResultatTennis "1" --o "1" EvenementT
+Bookmaker --o EvenementT
+AResultatTennis --o EvenementT
 ResultatTennis   --|> AResultatTennis
 
 /' Foot '/
@@ -49,8 +49,8 @@ object "ResultatFootAvance" as ResultatFootball {
     equipeA : Rennes
     equipeB : OM
 }
-Bookmaker "1" --o "*" EvenementF
-AResultatFoot "1" --o "1" EvenementF
+Bookmaker --o EvenementF
+AResultatFoot --o EvenementF
 ResultatFootball --|> AResultatFoot
 
 
@@ -62,7 +62,7 @@ ResultatFootball --|> AResultatFoot
 object "Corgi : Parieur" as ParieurC {
     NombreDeJetons : 10000
 }
-Systeme "1" -- "1" ParieurC : "< Credite / Debite"
+Systeme -- ParieurC : "< Credite / Debite"
 
 
 /' Il fait un paris simple sur le match de Foot '/
@@ -79,7 +79,7 @@ TicketSimpleCF --|> ATicketCF
 object PariSimpleCF
 
 TicketSimpleCF -- PariSimpleCF : "Pointe sur >"
-PariSimpleCF "1...*" --o "1" EvenementF
+PariSimpleCF --o EvenementF
 PariSimpleCF -- AResultatFoot : "< Lecture"
 ATicketCF -- PariSimpleCF
 ATicketCF -- ParieurC
@@ -101,7 +101,7 @@ ATicketCF -- ParieurC
 object "Marguerite : Parieur" as ParieurM {
     NombreDeJetons : 10000
 }
-Systeme "1" -- "1" ParieurM : "< Credite / Debite"
+Systeme -- ParieurM : "< Credite / Debite"
 
 
 
