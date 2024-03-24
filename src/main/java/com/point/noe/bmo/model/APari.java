@@ -6,6 +6,7 @@ import org.openxava.annotations.*;
 
 @MappedSuperclass @Embeddable
 public abstract class APari {
+	// Nom du pari
 	@Required
 	@Column(length=32)
 	private String Nom;
