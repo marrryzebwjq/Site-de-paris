@@ -47,7 +47,9 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Pari */
     abstract class APari
     {
-        GainTotal : int;
+        public GainTotal : int;
+        public PariMax : int;
+        public PariGainMax : int;
     };
 
     APari -- AResultat : "< Réfère"
@@ -178,8 +180,6 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     {
         private Sport : USport
         private Nom : String
-        private PariMax : int;
-        private PariGainMax : int;
     };
 
     AResultat "1" -a-> "1" Evenement;
