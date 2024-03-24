@@ -225,4 +225,8 @@ public class Systeme {
 			}
 		}
 	}
+	public static void Versement(Parieur InParieur, int InMontant)
+	{
+		InParieur.getCompte().Montant += InMontant;
+	}
 };
