@@ -4,6 +4,8 @@ import javax.persistence.*;
 
 @Embeddable
 public class PariSimple extends APari {
+	String Gagnant;
+
 	private String Reference;
 	
 	public PariSimple(String InReference)

@@ -5,4 +5,6 @@ import javax.persistence.*;
 @Embeddable
 public class Pari1String extends APariAvance {
 
+    String Reference1;
+
 }
