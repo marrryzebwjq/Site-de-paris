@@ -12,10 +12,6 @@ public abstract class APari {
 	@Required
 	public String Nom;
 	
-	// Gain Total
-	@Column(length=20)
-	public int GainTotal = 0;
-	
 	// Pari max
 	@Column(length=12)
 	@Required

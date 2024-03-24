@@ -7,6 +7,18 @@ public class TicketSimple extends ATicket {
 
 	public String PariGagnant;
 
+	public TicketSimple(
+			int InMontant,
+			APari InPari,
+			Parieur InParieur,
+			String InPariGagnant)
+	{
+		this.Montant 	 = InMontant;
+		this.Pari    	 = InPari;
+		this.Parieur 	 = InParieur;
+		this.PariGagnant = InPariGagnant;
+	}
+	
 	@Override
 	public boolean EstGagnant()
 	{

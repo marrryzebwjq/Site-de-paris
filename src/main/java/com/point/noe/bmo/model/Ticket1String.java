@@ -4,9 +4,20 @@ import javax.persistence.*;
 
 @Embeddable
 public class Ticket1String extends ATicket {
-
 	public String PariString;
 
+	public Ticket1String(
+			int InMontant,
+			APari InPari,
+			Parieur InParieur,
+			String InPariString)
+	{
+		this.Montant 	= InMontant;
+		this.Pari    	= InPari;
+		this.Parieur 	= InParieur;
+		this.PariString = InPariString;
+	}
+	
 	@Override
 	public boolean EstGagnant()
     {

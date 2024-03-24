@@ -15,19 +15,24 @@ public class Bookmaker extends Identifiable {
 	@Required
 	private String nom;
 	
-	@Action("DemandeOuvertureEvenement")
-	public void DemandeOuvertureEvenement(String sport, String evenement, AResultat resultat)
+	@Action("AjoutePari")
+	public void DemandeAjoutPari(String InEvenement, String InPari, int InMaxPari, int InMaxGain)
 	{
-		
+		Systeme.AjoutePari(InEvenement, InPari, InMaxPari, InMaxGain);
 	}
-	@Action("DemandeResultat")
-	public void DemandeResultat(String evenement)
+	@Action("DemandeOuvertureEvenement")
+	public void DemandeOuvertureEvenement(USport InSport, String InEvenement, int InPariMaxSimple, int InPariGainMax)
 	{
-		
+		Systeme.OuvrirEvenement(InSport, InEvenement, InPariMaxSimple, InPariGainMax);
+	}
+	@Action("DemandeResultats")
+	public AResultat DemandeResultats(String InEvenement)
+	{
+		return Systeme.AccederResultats(InEvenement);
 	}
 	@Action("DemandeFermetureEvenement")
-	public void DemandeFermetureEvenement(String evenement)
+	public void DemandeFermetureEvenement(String InEvenement)
 	{
-		
+		Systeme.FermerEvenement(InEvenement);
 	}
 };

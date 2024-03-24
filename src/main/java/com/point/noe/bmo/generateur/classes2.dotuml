@@ -112,7 +112,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     
     class Ticket1Entier
     {
-        public PariEntier1 : Integer;
+        public PariEntier1 : int;
     };
 
     Ticket1Entier --> ATicket;
@@ -120,8 +120,8 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
     class Ticket2Entier
     {
-        public PariEntier1 : Integer;
-        public PariEntier2 : Integer;
+        public PariEntier1 : int;
+        public PariEntier2 : int;
     };
 
     Ticket2Entier --> ATicket;
@@ -136,11 +136,11 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Parieur */
     class Parieur
     {
-        public DemandeTicketSimple(evenement : String, pari1 : String, montant : int) : boolean;
-        public DemandeTicket1Entier(evenement : String, pari1 : int, montant : int) : boolean;
-        public DemandeTicket2Entier(evenement : String, pari1 : int, pari2 : int, montant : int) : boolean;
-        public DemandeTicket1String(evenement : String, pari1 : String, montant : int) : boolean;
-        public DemandeVersement(montant : int) : boolean;
+        public DemandeTicketSimple(InEvenement : String, InPari1 : String, InMontant : int) : boolean;
+        public DemandeTicket1Entier(InEvenement : String, InPari1 : int, InMontant : int) : boolean;
+        public DemandeTicket2Entier(InEvenement : String, InPari1 : int, InPari2 : int, InMontant : int) : boolean;
+        public DemandeTicket1String(InEvenement : String, InPari1 : String, InMontant : int) : boolean;
+        public DemandeVersement(InMontant : int) : boolean;
     };
 
     Compte -a-> Parieur;
@@ -149,23 +149,22 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Bookmaker */
     class Bookmaker
     {
-        public DemandeOuvertureEvenement(sport : USport, evenement : String, resultat : AResultat) : boolean;
-        public DemandeResultat(evenement : String) : AResultat;
-        public DemandeFermetureEvenement(evenement : String) : boolean;
+        public DemandeOuvertureEvenement(InSport : USport, InEvenement : String, resultat : AResultat) : boolean;
+        public DemandeResultat(InEvenement : String) : AResultat;
+        public DemandeFermetureEvenement(InEvenement : String) : boolean;
     };
 
     /* Système */
     class Systeme
     {
-        public AjouteTicket1Simple(evenement : String, pari : PariSimple, pari1 : String, parieur : Parieur, montant : int) : void;
-        public AjouteTicket1Entier(evenement : String, pari : Pari1Entier, pari1 : int, parieur : Parieur, montant : int) : void;
-        public AjouteTicket2Entier(evenement : String, pari : Pari2Entier, pari1 : int, pari2 : int, parieur : Parieur, montant : int) : void;
-        public AjouteTicket1String(evenement : String, pari : Pari1String, pari1 : String, parieur : Parieur, montant : int) : void;
-        public AjoutePariAvance(evenement : String, pari : APariAvance) : void;
-        public OuvrirEvenement(sport : USport, nom : String) : void;
-        public FermetureEvenement(evenement : String) : void;
-        public Debiter(parieur : Parieur, ticket : ATicket) : void;
-        public Crediter(pari : APari, ticket : ATicket) : void;
+        public AjouteTicket1Simple(InEvenement : String, InPari : PariSimple, InPari1 : String, parieur : Parieur, InMontant : int) : void;
+        public AjouteTicket1Entier(InEvenement : String, InPari : Pari1Entier, InPari1 : int, parieur : Parieur, InMontant : int) : void;
+        public AjouteTicket2Entier(InEvenement : String, InPari : Pari2Entier, InPari1 : int, InPari2 : int, parieur : Parieur, InMontant : int) : void;
+        public AjouteTicket1String(InEvenement : String, InPari : Pari1String, InPari1 : String, parieur : Parieur, InMontant : int) : void;
+        public AjoutePariAvance(InEvenement : String, InPari : APariAvance) : void;
+        public AccederResultats(InEvenement : String) : AResultat;
+        public OuvrirEvenement(InSport : USport, InNom : String) : void;
+        public FermerEvenement(InEvenement : String) : void;
     };
 
     Systeme -- Compte : "< Crédite / Débite"

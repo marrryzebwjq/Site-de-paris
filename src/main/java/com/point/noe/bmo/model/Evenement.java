@@ -9,7 +9,7 @@ import org.openxava.annotations.*;
 @Embeddable
 public class Evenement {
 	// Constructeur
-	public Evenement(USport InSport, String InNom, int InPariMax, int InGainMax)
+	public Evenement(USport InSport, String InNom, int InPariMaxSimple, int InGainMaxSimple)
 	{
 		this.Sport 		 = InSport;
 		this.Nom   	  	 = InNom;
@@ -37,7 +37,7 @@ public class Evenement {
 		this.Tickets 	 = new ArrayList<ATicket>();
 		
 		// Pari simple
-		this.PariSimple  = new PariSimple(Resultat.Gagnant, InPariMax, InGainMax);
+		this.PariSimple  = new PariSimple(Resultat.Gagnant, InPariMaxSimple, InGainMaxSimple);
 		
 		// Pari Avancés
 		this.PariAvances = new ArrayList<APariAvance>();
