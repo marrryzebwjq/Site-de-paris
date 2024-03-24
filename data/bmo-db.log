@@ -1,15 +1,5 @@
-/*C1*/SET SCHEMA SYSTEM_LOBS
-INSERT INTO BLOCKS VALUES(0,2147483647,0)
-COMMIT
-/*C2*/SET SCHEMA PUBLIC
-DISCONNECT
 /*C3*/SET SCHEMA PUBLIC
-create table Customer (number integer not null, name varchar(50), primary key (number))
-create table IMAGES (ID varchar(32) not null, GALLERY varchar(32), image varbinary(16777216), primary key (ID))
-create table OXDISCUSSIONCOMMENTS (id varchar(32) not null, comment clob(16777216), discussionId varchar(32), time timestamp, userName varchar(30), primary key (id))
-create table YourFirstEntity (id varchar(32) not null, amount numeric(19,2), date date, description varchar(50), primary key (id))
-create index IDXbhlx4vunn24ym1tbrlgq8g30m on OXDISCUSSIONCOMMENTS (discussionId)
-INSERT INTO CUSTOMER VALUES(2,'FAFA')
-COMMIT
-INSERT INTO YOURFIRSTENTITY VALUES('402881a18e70a54d018e70a5fc930000',412423.00,'2027-08-02','GZG')
-COMMIT
+DISCONNECT
+/*C4*/SET SCHEMA PUBLIC
+create table Bookmaker (Nom varchar(255) not null, primary key (Nom))
+create table Parieur (nom varchar(255) not null, Montant integer, primary key (nom))
