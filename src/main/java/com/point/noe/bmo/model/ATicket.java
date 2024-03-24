@@ -9,6 +9,7 @@ public abstract class ATicket {
     public Boolean estGagnant()
     {
 
+    	return true;
     } 
 
 }
