@@ -20,29 +20,29 @@ public class Parieur extends Identifiable {
 	private Compte Compte;
 	
 	@Action("DemandeTicketSimple")
-	public void DemandeTicketSimple(String evenement, String nomPari, String pari1, int montant)
+	public void DemandeTicketSimple(String InEvenement, String InPari, String InPari1, int InMontant)
 	{
-		Systeme.AjouteTicket1Simple(evenement, nomPari, pari1, this, montant);
+		Systeme.AjouteTicket1Simple(InEvenement, InPari, InPari1, this, InMontant);
 	}
 	@Action("DemandeTicket1Entier")
-	public void DemandeTicket1Entier(String evenement, String nomPari, int pari1, int montant)
+	public void DemandeTicket1Entier(String InEvenement, String InPari, int InPari1, int InMontant)
 	{
-		Systeme.AjouteTicket1Entier(evenement, nomPari, pari1, this, montant);
+		Systeme.AjouteTicket1Entier(InEvenement, InPari, InPari1, this, InMontant);
 	}
 	@Action("DemandeTicket2Entier")
-	public void DemandeTicket2Entier(String evenement, String nomPari, int pari1, int pari2, int montant)
+	public void DemandeTicket2Entier(String InEvenement, String InPari, int InPari1, int pari2, int InMontant)
 	{
-		Systeme.AjouteTicket2Entier(evenement, nomPari, pari1, pari2, this, montant);
+		Systeme.AjouteTicket2Entier(InEvenement, InPari, InPari1, pari2, this, InMontant);
 	}
 	@Action("DemandeTicket1String")
-	public void DemandeTicket1String(String evenement, String nomPari, String pari1, int montant)
+	public void DemandeTicket1String(String InEvenement, String InPari, String InPari1, int InMontant)
 	{
-		Systeme.AjouteTicket1String(evenement, nomPari, pari1, this, montant);
+		Systeme.AjouteTicket1String(InEvenement, InPari, InPari1, this, InMontant);
 	}
 	// Permet d'émuler le fait de remplir le compte du parieur
 	@Action("DemandeVersement")
-	public void DemandeVersement(int montant)
+	public void DemandeVersement(int InMontant)
 	{
-		this.getCompte().Montant += montant;
+		this.getCompte().Montant += InMontant;
 	}
 };

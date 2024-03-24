@@ -44,7 +44,6 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     abstract class APari
     {
         public Nom : String;
-        public GainTotal : int;
         public PariMax : int;
         public GainMax : int;
     };
@@ -90,9 +89,8 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     {
         private Montant : int
 
-        public estGagnant() : boolean
+        public EstGagnant() : boolean
     };
-
 
     class TicketSimple
     {
@@ -136,11 +134,11 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Parieur */
     class Parieur
     {
-        public DemandeTicketSimple(InEvenement : String, InPari1 : String, InMontant : int) : boolean;
-        public DemandeTicket1Entier(InEvenement : String, InPari1 : int, InMontant : int) : boolean;
-        public DemandeTicket2Entier(InEvenement : String, InPari1 : int, InPari2 : int, InMontant : int) : boolean;
-        public DemandeTicket1String(InEvenement : String, InPari1 : String, InMontant : int) : boolean;
-        public DemandeVersement(InMontant : int) : boolean;
+        public DemandeTicketSimple(InEvenement : String, InPari : String, InPari1 : String, InMontant : int) : void;
+        public DemandeTicket1Entier(InEvenement : String, InPari : String, InPari1 : int, InMontant : int) : void;
+        public DemandeTicket2Entier(InEvenement : String, InPari : String, InPari1 : int, InPari2 : int, InMontant : int) : void;
+        public DemandeTicket1String(InEvenement : String, InPari : String, InPari1 : String, InMontant : int) : void;
+        public DemandeVersement(InMontant : int) : void;
     };
 
     Compte -a-> Parieur;
@@ -149,9 +147,10 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Bookmaker */
     class Bookmaker
     {
-        public DemandeOuvertureEvenement(InSport : USport, InEvenement : String, resultat : AResultat) : boolean;
+        public DemandeAjoutPari(InEvenement : String, InPari : String, InMaxPari : int, InMaxGain : int) : void;
+        public DemandeOuvertureEvenement(InSport : USport, InEvenement : String, resultat : AResultat) : void;
         public DemandeResultat(InEvenement : String) : AResultat;
-        public DemandeFermetureEvenement(InEvenement : String) : boolean;
+        public DemandeFermetureEvenement(InEvenement : String) : void;
     };
 
     /* Système */
