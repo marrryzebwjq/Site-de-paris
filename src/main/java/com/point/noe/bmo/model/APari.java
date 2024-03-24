@@ -4,7 +4,8 @@ import javax.persistence.*;
 
 import org.openxava.annotations.*;
 
-@MappedSuperclass @Embeddable
+@MappedSuperclass 
+@Embeddable
 public abstract class APari {
 	// Nom du pari
 	@Column(length=32)
@@ -13,7 +14,7 @@ public abstract class APari {
 	
 	// Gain Total
 	@Column(length=20)
-	public int GainTotal;
+	public int GainTotal = 0;
 	
 	// Pari max
 	@Column(length=12)
@@ -23,5 +24,5 @@ public abstract class APari {
 	// Gain de pari max
 	@Column(length=12)
 	@Required
-	public int PariGainMax;
+	public int GainMax;
 };

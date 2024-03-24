@@ -3,31 +3,31 @@ package com.point.noe.bmo.model;
 import javax.persistence.*;
 
 import org.openxava.annotations.*;
+import org.openxava.model.*;
 
 import lombok.*;
 
 @Entity
 @Getter 
 @Setter
-public class Bookmaker {
-	@Id
-	@Column(length=32)
+public class Bookmaker extends Identifiable {
+	@Column(length=32, unique=true)
 	@Required
 	private String nom;
 	
-	public boolean DemandeOuvertureEvenement(String sport, String evenement, AResultat resultat)
+	@Action("DemandeOuvertureEvenement")
+	public void DemandeOuvertureEvenement(String sport, String evenement, AResultat resultat)
 	{
 		
-		return true;
 	}
-	public boolean DemandeResultat(String evenement)
+	@Action("DemandeResultat")
+	public void DemandeResultat(String evenement)
 	{
 		
-		return true;
 	}
-	public boolean DemandeFermetureEvenement(String evenement)
+	@Action("DemandeFermetureEvenement")
+	public void DemandeFermetureEvenement(String evenement)
 	{
 		
-		return true;
 	}
 };

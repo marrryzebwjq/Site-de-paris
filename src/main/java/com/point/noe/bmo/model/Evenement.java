@@ -9,7 +9,7 @@ import org.openxava.annotations.*;
 @Embeddable
 public class Evenement {
 	// Constructeur
-	public Evenement(USport InSport, String InNom)
+	public Evenement(USport InSport, String InNom, int InPariMax, int InGainMax)
 	{
 		this.Sport 		 = InSport;
 		this.Nom   	  	 = InNom;
@@ -34,10 +34,10 @@ public class Evenement {
 		}
 		
 		// Tickets
-		this.Tickets = new ArrayList<ATicket>();
+		this.Tickets 	 = new ArrayList<ATicket>();
 		
 		// Pari simple
-		this.PariSimple = new PariSimple(Resultat.Gagnant);
+		this.PariSimple  = new PariSimple(Resultat.Gagnant, InPariMax, InGainMax);
 		
 		// Pari Avancés
 		this.PariAvances = new ArrayList<APariAvance>();
@@ -48,25 +48,29 @@ public class Evenement {
 	@Required
 	@Column(length=16)
 	@Enumerated(EnumType.ORDINAL)
-	private USport Sport;
+	public USport Sport;
 	
 	// Nom
 	@Required
 	@Column(length=8)
-	private String Nom;
+	public String Nom;
 	
 	
 	// Resultat
-	private AResultat Resultat;
+	@Embedded
+	public AResultat Resultat;
 	
 	// Tickets
-	@OneToMany
-	private Collection<ATicket> Tickets;
+	@OneToMany(
+			fetch=FetchType.LAZY)
+	public Collection<ATicket> Tickets;
 	
 	// Pari Simple
-	private PariSimple PariSimple;
+	@Embedded
+	public PariSimple PariSimple;
 	
 	// Pari Avances
-	@OneToMany
-	private Collection<APariAvance> PariAvances;
+	@OneToMany(
+			fetch=FetchType.LAZY)
+	public Collection<APariAvance> PariAvances;
 };

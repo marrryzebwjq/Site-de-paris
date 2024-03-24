@@ -3,9 +3,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     abstract class AResultat
     { 
         public Gagnant : String;
-        public DemandeAjoutPari1Entier(Reference1 : Integer) : boolean;
-        public DemandeAjoutPari2Entier(Reference1 : Integer, Reference2 : Integer) : boolean;
-        public DemandeAjoutPari1String(Refenrece1 : String) : boolean;
+        public abstract DemandeCreationPari(InNomPari : String, InPariMax : int, InGainMax : int) : APariAvance;
     };
 
     class ResultatFootball
@@ -30,8 +28,6 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
         public scoreB4 : Integer;
         public scoreA5 : Integer; 
         public scoreB5 : Integer;
-        public joueurA : String;
-        public joueurB : String;
     };
 
     ResultatTennis --> AResultat;
@@ -165,9 +161,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
         public AjouteTicket1Entier(evenement : String, pari : Pari1Entier, pari1 : int, parieur : Parieur, montant : int) : void;
         public AjouteTicket2Entier(evenement : String, pari : Pari2Entier, pari1 : int, pari2 : int, parieur : Parieur, montant : int) : void;
         public AjouteTicket1String(evenement : String, pari : Pari1String, pari1 : String, parieur : Parieur, montant : int) : void;
-        public AjoutePari1Entier(evenement : String, reference1 : Integer, maxPari : int, maxGain : int) : void;
-        public AjoutePari2Entier(evenement : String, reference1 : Integer, reference2 : Integer, maxPari : int, maxGain : int) : void;
-        public AjoutePari1String(evenement : String, reference1 : String, maxPari : int, maxGain : int) : void;
+        public AjoutePariAvance(evenement : String, pari : APariAvance) : void;
         public OuvrirEvenement(sport : USport, nom : String) : void;
         public FermetureEvenement(evenement : String) : void;
         public Debiter(parieur : Parieur, ticket : ATicket) : void;

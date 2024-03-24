@@ -2,20 +2,12 @@ package com.point.noe.bmo.model;
 
 import javax.persistence.*;
 
+import org.openxava.annotations.*;
+
 @MappedSuperclass @Embeddable
 public abstract class AResultat {
 	public String Gagnant;
 	
-	public void DemandeAjoutPari1Entier(Integer Reference1)
-	{
-	
-	}
-	public void DemandeAjoutPari2Entier(Integer Reference1, Integer Reference2)
-	{
-		
-	}
-	public void DemandeAjoutPari1String(String Reference1)
-	{
-		
-	}
+	@Action("DemandeCreationPari")
+	abstract public APariAvance DemandeCreationPari(String NomPari, int PariMax, int GainMax);
 };

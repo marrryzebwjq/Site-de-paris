@@ -2,14 +2,26 @@ package com.point.noe.bmo.model;
 
 import javax.persistence.*;
 
-@MappedSuperclass @Embeddable
+import org.openxava.annotations.*;
+
+import lombok.*;
+
+@MappedSuperclass 
+@Embeddable
 public abstract class ATicket {
+	@Getter
+	@Required
     private int Montant;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @Embedded
+    @Required
+    protected APari Pari;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @Embedded
+    protected Parieur Parieur;
 
-    public Boolean estGagnant()
-    {
-
-    	return true;
-    } 
+    abstract public boolean EstGagnant();
 
 };
