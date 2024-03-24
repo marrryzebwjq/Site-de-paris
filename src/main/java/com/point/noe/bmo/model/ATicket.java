@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @MappedSuperclass @Embeddable
 public abstract class ATicket {
-    private Montant : int
+    private int Montant;
 
     public Boolean estGagnant()
     {
