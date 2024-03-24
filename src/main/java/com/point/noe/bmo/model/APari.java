@@ -6,6 +6,10 @@ import org.openxava.annotations.*;
 
 @MappedSuperclass @Embeddable
 public abstract class APari {
+	
+	// Gain de pari total
+	//public GainTotal : int;
+
 	// Pari max
 	@Required
 	@Column(length=12)
