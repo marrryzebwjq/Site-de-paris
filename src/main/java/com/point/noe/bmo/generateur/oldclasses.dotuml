@@ -1,39 +1,17 @@
 ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
-  abstract class AResultat
-  {
-    private Gagnant : String
-  }
-  abstract class ATicket
-  {
-    private Montant : Entier
-  }
-  abstract class ATicketAvance
-  {
   
-  }
-  abstract class APari
-  {
-    abstract private estGagnant(ticket : ATicket, evenement : Evenement)
-  }
-  abstract class APariAvance
-  {
-    abstract private estGagnant(ticket : ATicket, evenement : Evenement)
-  }
-
-  class TicketSimple
-  {
-    private PariGagnant : String
-  }
   
-  class PariSimple
-  {
-    private estGagnant(ticket : TicketSimple, evenement : Evenement)
-  }
 
   class Bookmaker
   {
     public ajoutEvenement(Evenement : AResultat)
   }
+
+class Systeme
+  {
+    private FermetureEvenement(evenement : Evenement);
+  }
+
 
   class Evenement
   {
@@ -41,6 +19,15 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
     public ajoutAPari(Pari : APari)
   }
+  
+  abstract class AResultat
+  {
+    private Gagnant : String
+  }
+
+
+
+
 
   class Parieur
   {
@@ -49,9 +36,31 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     public parier(pari : APari, montant : Montant)
   }
 
-  class Systeme
+
+  abstract class ATicket
   {
-    private FermetureEvenement(evenement : Evenement);
+    private Montant : Entier
+  }
+  abstract class ATicketAvance
+  {
+  }
+  class TicketSimple
+  {
+    private PariGagnant : String
+  }
+  
+
+  abstract class APari
+  {
+    abstract private estGagnant(ticket : ATicket, evenement : Evenement)
+  }
+  class PariSimple
+  {
+    private estGagnant(ticket : TicketSimple, evenement : Evenement)
+  }
+  abstract class APariAvance
+  {
+    abstract private estGagnant(ticket : ATicket, evenement : Evenement)
   }
 
   TicketSimple -g-> ATicket;
@@ -113,5 +122,35 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
   // Exemple
   PariFootballMitemps1 -- ResultatFootball : "< Lecture Champs A1 et B1";
+
+
+
+
+  // Mise en page
+
+  align {
+    Bookmaker
+    Evenement
+    AResultat
+  }
+  align {
+    ResultatFootball
+    ResultatBaseball
+    ResultatTennis
+  }
+
+  align {
+    Systeme
+    Parieur
+  }
+
+  align {
+    TicketSimple
+    ATicketAvance
+  }
+  align {
+    PariFootballMitemps1
+    APariAvance
+  }
 
 }
