@@ -57,7 +57,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
     class PariSimple
     {
-        Gagnant : String
+        public Gagnant : String
     };
 
     PariSimple --> APari;
@@ -69,22 +69,22 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
     class Pari1Entier
     {
-        Reference1 : Integer;
+        public Reference1 : Integer;
     };
 
     Pari1Entier --> APariAvance;
 
     class Pari2Entier
     {
-        Reference1 : Integer;
-        Reference2 : Integer;
+        public Reference1 : Integer;
+        public Reference2 : Integer;
     };
 
     Pari2Entier --> APariAvance;
 
     class Pari1String
     {
-        Reference1 : String;
+        public Reference1 : String;
     };
 
     Pari1String--> APariAvance;
@@ -100,7 +100,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
     class TicketSimple
     {
-        PariGagnant : String;
+        public PariGagnant : String;
     };
 
     TicketSimple -- PariSimple : "< Pari sur";
@@ -108,7 +108,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
     class Ticket1String
     {
-        PariString1 : String;
+        public PariString1 : String;
     };
 
     Ticket1String --> ATicket;
@@ -116,7 +116,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     
     class Ticket1Entier
     {
-        PariEntier1 : Integer;
+        public PariEntier1 : Integer;
     };
 
     Ticket1Entier --> ATicket;
@@ -124,8 +124,8 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
     class Ticket2Entier
     {
-        PariEntier1 : Integer;
-        PariEntier2 : Integer;
+        public PariEntier1 : Integer;
+        public PariEntier2 : Integer;
     };
 
     Ticket2Entier --> ATicket;
@@ -134,7 +134,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Compte */
     class Compte
     {
-        Capital : int;
+        public Capital : int;
     };
 
     /* Parieur */
