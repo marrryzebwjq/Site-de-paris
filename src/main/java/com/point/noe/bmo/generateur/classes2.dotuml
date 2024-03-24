@@ -2,41 +2,44 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Résultats */
     abstract class AResultat
     { 
-        private Gagnant : String;
+        public Gagnant : String;
+        public DemandeAjoutPari1Entier(Reference1 : Integer) : bool;
+        public DemandeAjoutPari2Entier(Reference1 : Integer, Reference2 : Integer) : bool;
+        public DemandeAjoutPari1String(Refenrece1 : String) : bool;
     };
 
     class ResultatFootball
     {
-        private ScoreMiTempsA1 : Integer;
-        private ScoreMiTempsB1 : Integer;
-        private ScoreMiTempsA2 : Integer;
-        private ScoreMiTempsB2 : Integer;
+        public ScoreMiTempsA1 : Integer;
+        public ScoreMiTempsB1 : Integer;
+        public ScoreMiTempsA2 : Integer;
+        public ScoreMiTempsB2 : Integer;
     };
 
     ResultatFootball --> AResultat;
 
     class ResultatTennis
     {
-        private scoreA1 : Integer; 
-        private scoreB1 : Integer; 
-        private scoreA2 : Integer;
-        private scoreB2 : Integer; 
-        private scoreA3 : Integer; 
-        private scoreB3 : Integer; 
-        private scoreA4 : Integer;
-        private scoreB4 : Integer;
-        private scoreA5 : Integer; 
-        private scoreB5 : Integer;
-        private joueurA : String;
-        private joueurB : String;
+        public scoreA1 : Integer; 
+        public scoreB1 : Integer; 
+        public scoreA2 : Integer;
+        public scoreB2 : Integer; 
+        public scoreA3 : Integer; 
+        public scoreB3 : Integer; 
+        public scoreA4 : Integer;
+        public scoreB4 : Integer;
+        public scoreA5 : Integer; 
+        public scoreB5 : Integer;
+        public joueurA : String;
+        public joueurB : String;
     };
 
     ResultatTennis --> AResultat;
 
     class ResultatBaseball
     {
-        private scoreA : Integer; 
-        private scoreB : Integer;
+        public scoreA : Integer; 
+        public scoreB : Integer;
     };
 
     ResultatBaseball --> AResultat;
@@ -44,7 +47,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Pari */
     abstract class APari
     {
-
+        MontantTotal : int;
     };
 
     APari -- AResultat : "< Réfère"
@@ -129,10 +132,10 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     class Parieur
     {
         private Capital : Entier
-        public DemandeTicketSimple(nom : String, pari : String, montant : int) : bool;
-        public DemandeTicket1Entier(nom : String, pari1 : int, montant : int) : bool;
-        public DemandeTicket2Entier(nom : String, pari1 : int, pari2 : int, montant : int) : bool;
-        public DemandeTicket1String(nom : String, pari : String, montant : int) : bool;
+        public DemandeTicketSimple(evenement : String, pari : String, montant : int) : bool;
+        public DemandeTicket1Entier(evenement : String, pari1 : int, montant : int) : bool;
+        public DemandeTicket2Entier(evenement : String, pari1 : int, pari2 : int, montant : int) : bool;
+        public DemandeTicket1String(evenement : String, pari : String, montant : int) : bool;
         public DemandeAcreditation(montant : int) : bool;
     }
 
@@ -141,15 +144,19 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Bookmaker */
     class Bookmaker
     {
-        public DemandeOuvertureEvenement(sport : String, nom : String, resultat : AResultat) : bool;
-        public DemandeResultat(nom : String) : AResultat;
+        public DemandeOuvertureEvenement(sport : String, evenement : String, resultat : AResultat) : bool;
+        public DemandeResultat(evenement : String) : AResultat;
         public DemandeFermetureEvenement(sport : String) : bool;
     };
 
     /* Système */
     class Systeme
     {
-        
+        public AjoutePari1Entier(evenement : String, pari1 : Integer) : void;
+        public AjoutePari2Entier(evenement : String, pari2 : Integer, pari2 : Integer) : void;
+        public AjoutePari1String(evenement : String, pari1 : String) : void;
+        public Debiter(parieur : Parieur, ticket : ATicket) : void;
+        public Crediter(pari : APari, ticket : ATicket)
     };
 
     Systeme -- Parieur : "< Crédite / Débite"
@@ -165,6 +172,8 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
     AResultat "1" -a-> "1" Evenement;
     PariSimple "1" -a-> "1" Evenement; // Un évènement contient toujours un pari simple
+    APariAvance "*" -a-> "1" Evenement;
     Bookmaker -- Systeme : "Communique >";
     Parieur -- Systeme : "Communique >";
+    AResultat -- Systeme : "Communique >";
 }
