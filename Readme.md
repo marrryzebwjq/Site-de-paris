@@ -29,9 +29,6 @@ public class Exemple {
     public Score : int; //et pas   public int Score;
 }
 
-
-
-
 2. Model (OpenXava)
 - A partir du parseur, nous avons implémenté nous-mêmes les fonctions, et ajouté les @, ainsi que les héritages.
 - Pour une raison inconnue, openxava plante dès que nous tentons de nous connecter. (Erreur 500)
