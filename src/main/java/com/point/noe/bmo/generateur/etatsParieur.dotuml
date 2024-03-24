@@ -1,0 +1,20 @@
+StateDiagram [frame=true framecolor=yellow label="Diagramme d'état d'un parieur" splines=ortho] {
+  state Etat1 as "Inscrit" with behavior "Observe les évènements dispo"
+  state Etat22 as "Attente"
+  state Etat3 as "Attente d'un résultat"
+  state Etat4 as "Gagnant"
+  state Etat5 as "Perdant"
+  
+  
+  
+  
+  initialState->Etat1 "Inscription"
+  Etat1 -> Etat22 "Demande un ticket"
+  Etat22 -> Etat1 "Ticket refusé"
+  Etat22 -> Etat3 "Ticket accepté"
+  Etat3 -> Etat4 "gagne le paris"
+  Etat3 -> Etat5 "perd"
+  Etat4 -> finalstate "Reçois de l'argent"
+  Etat5 -> finalstate "est débité"
+  //Etat1 -> finalstate
+}
