@@ -150,9 +150,9 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Bookmaker */
     class Bookmaker
     {
-        public DemandeOuvertureEvenement(sport : String, evenement : String, resultat : AResultat) : bool;
+        public DemandeOuvertureEvenement(sport : USport, evenement : String, resultat : AResultat) : bool;
         public DemandeResultat(evenement : String) : AResultat;
-        public DemandeFermetureEvenement(sport : String) : bool;
+        public DemandeFermetureEvenement(evenement : String) : bool;
     };
 
     /* Système */
@@ -165,6 +165,8 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
         public AjoutePari1Entier(evenement : String, pari1 : Integer) : void;
         public AjoutePari2Entier(evenement : String, pari2 : Integer, pari2 : Integer) : void;
         public AjoutePari1String(evenement : String, pari1 : String) : void;
+        public OuvrirEvenement(sport : USport, nom : String, pariMax : int, gainMax : int) : void;
+        public FermetureEvenement(evenement : String) : void;
         public Debiter(parieur : Parieur, ticket : ATicket) : void;
         public Crediter(pari : APari, ticket : ATicket)
     };
@@ -174,7 +176,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Evènement */
     class Evenement
     {
-        private Sport : String
+        private Sport : USport
         private Nom : String
         private PariMax : int;
         private PariGainMax : int;
@@ -188,4 +190,13 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     ATicket "*" -a-> "1" Evenement;
     ATicket "*" -- "1" Parieur : "Associé à >" 
     AResultat -- Systeme : "Communique >";
+    Evenement "*" -a-> "1" Systeme;
+
+    /* Type de Sport */
+    class USport
+    {
+        FOOTBALL = "1";
+        TENNIS = "2";
+        BASEBALL = "3";
+    };
 }
