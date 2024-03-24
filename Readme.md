@@ -1,15 +1,18 @@
 Auteurs : Louis-Quentin NOE et Marie POINT
 
 Projet BMO.
+0. Diagrammes
+
+Ils sont dans :
+                      BMO/scr/main/java/com/point/noe/bmo/generateur/
 
 1. Générateur de code
 
-Le chemin du générateur est : BMO/scr/main/...../com/java/generateurdecode.py
+Le chemin du générateur est : BMO/scr/main/java/...../bmo/generateurdecode.py
 Le fichier que le génénateur de classe va lire est :    ./generateur/classes.dotuml
 Les classes générées seront dans :                      ./model2/nouvelleclasse.java
 
-Le générateur va lire le fichier source, et dès qu'une classe sera lue, un fichier class.java
-portant le nom de la classe sera créée. Tout le contenu de la classe sera copié dans le nouveau fichier.
+Le générateur va lire le fichier source, et dès qu'une classe sera lue, un fichier class.java portant le nom de la classe sera créée. Tout le contenu de la classe sera copié dans le nouveau fichier.
 
 Remarque :
 > Lancez le une fois pour voir tous les fichiers apparaître.
@@ -25,7 +28,7 @@ class Exemple {
     public Score : int;
 }
 
-ce qui sera généré sera :
+  ce qui sera généré sera :
 
 public class Exemple {
     public Score : int; //et pas   public int Score;
