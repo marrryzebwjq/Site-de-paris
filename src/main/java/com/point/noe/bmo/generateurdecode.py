@@ -1,4 +1,5 @@
-fileuml = open("classes.dotuml", 'r')
+fileuml = open("generateur/classes2.dotuml", 'r')
+path = 'model2/'
 
 def isDebutDeClasse(ligne) :
     isClass = False
@@ -18,13 +19,12 @@ def isDebutDeClasse(ligne) :
                 hasAccolades = '{' in line
                 className = words[1]
         elif(words[0] == '{') :
-                isClass = True
+                isClass = False
                 hasAccolades = True
-    
     return isClass, hasAccolades, className, isAbstract
 
 def createClassFile(className) :
-    return open(className+'.java', 'w')
+    return open(path+className+'.java', 'w')
 
 
 # main
@@ -35,7 +35,8 @@ isOpen = False
 for line in fileuml :
     
     isClass, hasAccolades, className, isAbstract = isDebutDeClasse(line)
-    
+    # Première ligne de la définition d'une classe :
+        
     if ( not(writeLine) and isClass ) : # Si une classe est définie on écrit tout jusque la fin de la classe
         
         writeLine = True                # On va écrire la première ligne :
@@ -44,7 +45,8 @@ for line in fileuml :
             filejava = createClassFile(className)
             filejava.write('public ')
             isOpen = True
-        else :
+        
+        else : #line.split()[0]=='{'
             filejava.write('    ')
             
     
@@ -52,22 +54,20 @@ for line in fileuml :
             filejava.write(word + ' ') # on écrit le mot,
 
             if '}' in word :           # on regarde si le mot est un },
-                filejava.write("\n")    # si c'est le cas on ferme le fichier.
-                writeLine = False
+                writeLine = False      # si c'est le cas on ferme le fichier.
                 filejava.close()
                 isOpen = False
 
-        if isOpen :
-            filejava.write("\n")           #fin de ligne.
+        if isOpen :                    # si le fichier est toujours ouvert on continue d'écrire
+            filejava.write("\n")       # fin de ligne.
         
-            if not(hasAccolades) :
-                filejava = False
-                filejava.close()
-                isOpen = False
-
+                
+    # fin de la première ligne d'une classe.
     
+    # Contenu de la classe :
 
-    elif writeLine : # Lignes à l'intérieur d'une classe :
+    elif (writeLine and isOpen) : # Lignes à l'intérieur d'une classe :
+        
         filejava.write('    ')
         for word in line.split() :
             filejava.write(word + ' ')
@@ -80,6 +80,7 @@ for line in fileuml :
 
         if isOpen :
             filejava.write("\n") #fin de ligne
-        
+            
+    # fin du contenu de la classe.
 
 fileuml.close()
