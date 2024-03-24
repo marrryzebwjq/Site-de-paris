@@ -66,15 +66,15 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
 
     class Pari1Entier
     {
-        Reference1 : Entier;
+        Reference1 : Integer;
     };
 
     Pari1Entier --> APariAvance;
 
     class Pari2Entier
     {
-        Reference1 : Entier;
-        Reference2 : Entier;
+        Reference1 : Integer;
+        Reference2 : Integer;
     };
 
     Pari2Entier --> APariAvance;
@@ -131,7 +131,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Parieur */
     class Parieur
     {
-        private Capital : Entier
+        private Capital : int
         public DemandeTicketSimple(evenement : String, pari : String, montant : int) : bool;
         public DemandeTicket1Entier(evenement : String, pari1 : int, montant : int) : bool;
         public DemandeTicket2Entier(evenement : String, pari1 : int, pari2 : int, montant : int) : bool;
