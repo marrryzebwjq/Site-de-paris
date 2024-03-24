@@ -128,17 +128,23 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     Ticket2Entier --> ATicket;
     Ticket2Entier -- Pari2Entier : "< Pari sur";
 
+    /* Compte */
+    class Compte
+    {
+        Capital : int;
+    };
+
     /* Parieur */
     class Parieur
     {
-        private Capital : int
-        public DemandeTicketSimple(evenement : String, pari : String, montant : int) : bool;
+        public DemandeTicketSimple(evenement : String, pari1 : String, montant : int) : bool;
         public DemandeTicket1Entier(evenement : String, pari1 : int, montant : int) : bool;
         public DemandeTicket2Entier(evenement : String, pari1 : int, pari2 : int, montant : int) : bool;
-        public DemandeTicket1String(evenement : String, pari : String, montant : int) : bool;
-        public DemandeAcreditation(montant : int) : bool;
-    }
+        public DemandeTicket1String(evenement : String, pari1 : String, montant : int) : bool;
+        public DemandeVersement(montant : int) : bool;
+    };
 
+    Compte -a-> Parieur;
     Parieur -- APari : "< Pari sur"
 
     /* Bookmaker */
@@ -152,6 +158,10 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     /* Système */
     class Systeme
     {
+        public AjouteTicket1Simple(evenement : String, pari1 : String, parieur : Parieur, montant : int) : void;
+        public AjouteTicket1Entier(evenement : String, pari1 : int, parieur : Parieur, montant : int) : void;
+        public AjouteTicket2Entier(evenement : String, pari1 : int, pari2 : int, parieur : Parieur, montant : int) : void;
+        public AjouteTicket1String(evenement : String, pari1 : String, parieur : Parieur, montant : int) : void;
         public AjoutePari1Entier(evenement : String, pari1 : Integer) : void;
         public AjoutePari2Entier(evenement : String, pari2 : Integer, pari2 : Integer) : void;
         public AjoutePari1String(evenement : String, pari1 : String) : void;
@@ -159,7 +169,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
         public Crediter(pari : APari, ticket : ATicket)
     };
 
-    Systeme -- Parieur : "< Crédite / Débite"
+    Systeme -- Compte : "< Crédite / Débite"
 
     /* Evènement */
     class Evenement
@@ -175,5 +185,7 @@ ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
     APariAvance "*" -a-> "1" Evenement;
     Bookmaker -- Systeme : "Communique >";
     Parieur -- Systeme : "Communique >";
+    ATicket "*" -a-> "1" Evenement;
+    ATicket "*" -- "1" Parieur : "Associé à >" 
     AResultat -- Systeme : "Communique >";
 }
