@@ -1,0 +1,12 @@
+StateDiagram [frame=true framecolor=pink label="Diagramme d'état d'un évènement" splines=ortho] {
+
+  state Ouvert with behavior "Acceptation des paris"
+	state Fermé as "En cours" with behavior "Fermeture des paris"
+  state Terminé with behavior "Actualisation des scores"
+  
+  initialState->Ouvert "Bookmaker planifie l'évènement/ouverture des paris"
+  Ouvert -> Fermé "Début de l'évènement/Fermeture des paris"
+  Fermé -> Terminé "Fin de l'évènement"
+  Terminé -> finalstate
+
+}
