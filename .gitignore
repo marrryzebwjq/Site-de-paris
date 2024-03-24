@@ -1,6 +1,5 @@
 target/
 *.jar
-*.java
 *.class
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -40,3 +39,4 @@ build/
 .DS_Store
 test.txt
 test2.txt
+temp/**
