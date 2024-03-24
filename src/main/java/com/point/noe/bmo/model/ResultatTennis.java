@@ -5,17 +5,17 @@ import javax.persistence.*;
 @Embeddable
 public class ResultatTennis extends AResultat {
     
-    public scoreA1 : Integer; 
-    public scoreB1 : Integer; 
-    public scoreA2 : Integer;
-    public scoreB2 : Integer; 
-    public scoreA3 : Integer; 
-    public scoreB3 : Integer; 
-    public scoreA4 : Integer;
-    public scoreB4 : Integer;
-    public scoreA5 : Integer; 
-    public scoreB5 : Integer;
-    public joueurA : String;
-    public joueurB : String;
+    public Integer scoreA1; 
+    public Integer scoreB1; 
+    public Integer scoreA2;
+    public Integer scoreB2; 
+    public Integer scoreA3; 
+    public Integer scoreB3; 
+    public Integer scoreA4;
+    public Integer scoreB4;
+    public Integer scoreA5; 
+    public Integer scoreB5;
+    public String joueurA;
+    public String joueurB;
 
 }

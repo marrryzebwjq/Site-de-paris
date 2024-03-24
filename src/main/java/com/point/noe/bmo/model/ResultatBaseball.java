@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Embeddable
 public class ResultatBaseball extends AResultat {
     
-    public scoreA : Integer; 
-    public scoreB : Integer;
+    public Integer scoreA;
+    public Integer scoreB;
 
 }

@@ -4,10 +4,10 @@ import javax.persistence.*;
 
 @Embeddable
 public class ResultatFootball extends AResultat {
-    
-    public ScoreMiTempsA1 : Integer;
-    public ScoreMiTempsB1 : Integer;
-    public ScoreMiTempsA2 : Integer;
-    public ScoreMiTempsB2 : Integer;
+
+    public Integer ScoreMiTempsA1;
+    public Integer ScoreMiTempsB1;
+    public Integer ScoreMiTempsA2;
+    public Integer ScoreMiTempsB2;
 
 }
