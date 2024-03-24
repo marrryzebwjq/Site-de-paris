@@ -1,4 +1,4 @@
-fileuml = open("generateur/classes2.dotuml", 'r')
+fileuml = open("generateur/classes.dotuml", 'r')
 path = 'model2/'
 
 def isDebutDeClasse(ligne) :

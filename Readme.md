@@ -12,6 +12,8 @@ Le générateur va lire le fichier source, et dès qu'une classe sera lue, un fi
 portant le nom de la classe sera créée. Tout le contenu de la classe sera copié dans le nouveau fichier.
 
 Remarque :
+> Lancez le une fois pour voir tous les fichiers apparaître.
+
 > Le fichier source doit absolument s'appeler classes.dotuml et être dans le dossier generateur.
   (On peut quand même modifier le nom du fichier source au début du script si besoin.)
 
@@ -38,4 +40,4 @@ public class Exemple {
 - Nous avons en revanche implémenté toute la logique du bookmakeur et des parieurs. Le système est internement fonctionnel, à priori,
 mais il ne l'est pas au niveau de l'interface (openxava).
 - Tous les sports n'ont pas été pris en compte, mais nous avons pensé à un système modulable, qui en fonction d'un ensemble de résultats,
-nous pouvons créé un type de pari, qui eux-mêmes sont modulables en fonction des besoins.
+nous pouvons créer un type de pari, qui eux-mêmes sont modulables en fonction des besoins.
