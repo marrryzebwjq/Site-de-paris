@@ -1,0 +1,170 @@
+ClassDiagram [frame=true framecolor=steelblue label="Class Diagram"] {
+    /* Résultats */
+    abstract class AResultat
+    { 
+        private Gagnant : String;
+    };
+
+    class ResultatFootball
+    {
+        private ScoreMiTempsA1 : Integer;
+        private ScoreMiTempsB1 : Integer;
+        private ScoreMiTempsA2 : Integer;
+        private ScoreMiTempsB2 : Integer;
+    };
+
+    ResultatFootball --> AResultat;
+
+    class ResultatTennis
+    {
+        private scoreA1 : Integer; 
+        private scoreB1 : Integer; 
+        private scoreA2 : Integer;
+        private scoreB2 : Integer; 
+        private scoreA3 : Integer; 
+        private scoreB3 : Integer; 
+        private scoreA4 : Integer;
+        private scoreB4 : Integer;
+        private scoreA5 : Integer; 
+        private scoreB5 : Integer;
+        private joueurA : String;
+        private joueurB : String;
+    };
+
+    ResultatTennis --> AResultat;
+
+    class ResultatBaseball
+    {
+        private scoreA : Integer; 
+        private scoreB : Integer;
+    };
+
+    ResultatBaseball --> AResultat;
+
+    /* Pari */
+    abstract class APari
+    {
+
+    };
+
+    APari -- AResultat : "< Réfère"
+
+    class PariSimple
+    {
+        Gagnant : String
+    };
+
+    PariSimple --> APari;
+
+    abstract class APariAvance
+    {};
+
+    APariAvance --> APari;
+
+    class Pari1Entier
+    {
+        Reference1 : Entier;
+    };
+
+    Pari1Entier --> APariAvance;
+
+    class Pari2Entier
+    {
+        Reference1 : Entier;
+        Reference2 : Entier;
+    };
+
+    Pari2Entier --> APariAvance;
+
+    class Pari1String
+    {
+        Reference1 : String;
+    };
+
+    Pari1String--> APariAvance;
+
+    /* Tickets */
+    abstract class ATicket
+    {
+        private Montant : int
+
+        public estGagnant() : boolean
+    };
+
+
+    class TicketSimple
+    {
+        PariGagnant : String;
+    };
+
+    TicketSimple -- PariSimple : "< Pari sur";
+    TicketSimple --> ATicket;
+
+    class Ticket1String
+    {
+        PariString1 : String;
+    };
+
+    Ticket1String --> ATicket;
+    Ticket1String -- Pari1String : "< Pari sur";
+    
+    class Ticket1Entier
+    {
+        PariEntier1 : Integer;
+    };
+
+    Ticket1Entier --> ATicket;
+    Ticket1Entier -- Pari1Entier : "< Pari sur";
+
+    class Ticket2Entier
+    {
+        PariEntier1 : Integer;
+        PariEntier2 : Integer;
+    };
+
+    Ticket2Entier --> ATicket;
+    Ticket2Entier -- Pari2Entier : "< Pari sur";
+
+    /* Parieur */
+    class Parieur
+    {
+        private Capital : Entier
+        public DemandeTicketSimple(nom : String, pari : String, montant : int) : bool;
+        public DemandeTicket1Entier(nom : String, pari1 : int, montant : int) : bool;
+        public DemandeTicket2Entier(nom : String, pari1 : int, pari2 : int, montant : int) : bool;
+        public DemandeTicket1String(nom : String, pari : String, montant : int) : bool;
+        public DemandeAcreditation(montant : int) : bool;
+    }
+
+    Parieur -- APari : "< Pari sur"
+
+    /* Bookmaker */
+    class Bookmaker
+    {
+        public DemandeOuvertureEvenement(sport : String, nom : String, resultat : AResultat) : bool;
+        public DemandeResultat(nom : String) : AResultat;
+        public DemandeFermetureEvenement(sport : String) : bool;
+    };
+
+    /* Système */
+    class Systeme
+    {
+        
+    };
+
+    Systeme -- Parieur : "< Crédite / Débite"
+
+    /* Evènement */
+    class Evenement
+    {
+        private Sport : String
+        private Nom : String
+        private MontantMax : int;
+        private MontantGain : int;
+    };
+
+    AResultat "1" -a-> "1" Evenement;
+    PariSimple "1" -a-> "1" Evenement; // Un évènement contient toujours un pari simple
+    Bookmaker -- Systeme : "Communique >";
+    Parieur -- Systeme : "Communique >";
+}
